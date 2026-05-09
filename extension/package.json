@@ -1,0 +1,65 @@
+{
+  "name": "daraklab-copilot",
+  "displayName": "DarakLab Copilot",
+  "description": "Local-first AI Lab Assistant for FPGA/HLS/RFSoC",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "AI",
+    "Data Science"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "daraklab.explainCode",
+        "title": "DarakLab: Explain This Code"
+      },
+      {
+        "command": "daraklab.optimizeHLS",
+        "title": "DarakLab: Optimize for HLS"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "daraklab-explorer",
+          "title": "DarakLab",
+          "icon": "media/icon.png"
+        }
+      ]
+    },
+    "views": {
+      "daraklab-explorer": [
+        {
+          "id": "daraklab-chat",
+          "name": "Chat Assistant",
+          "type": "webview"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.75.0",
+    "@types/node": "16.x",
+    "typescript": "^4.9.5",
+    "eslint": "^8.34.0",
+    "@typescript-eslint/eslint-plugin": "^5.53.0",
+    "@typescript-eslint/parser": "^5.53.0"
+  },
+  "dependencies": {
+    "axios": "^1.3.4"
+  }
+}

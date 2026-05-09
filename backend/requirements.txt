@@ -1,0 +1,17 @@
+fastapi
+uvicorn
+pydantic
+python-multipart
+ollama
+chromadb
+sentence-transformers
+pymupdf
+python-docx
+numpy
+scipy
+matplotlib
+pandas
+torch
+hls4ml
+requests
+python-dotenv
