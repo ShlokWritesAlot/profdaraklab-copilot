@@ -5,6 +5,7 @@ import axios from 'axios';
 const ExperimentTracker = () => {
   const [experiments, setExperiments] = useState([]);
   const [showForm, setShowForm] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [newExp, setNewExp] = useState({
     title: '',
     objective: '',
@@ -24,12 +25,22 @@ const ExperimentTracker = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await axios.post('http://localhost:8000/experiments', newExp);
+      setNewExp({
+        title: '',
+        objective: '',
+        hardware: 'RFSoC 4x2',
+        result: '',
+        conclusions: ''
+      });
       setShowForm(false);
       fetchExperiments();
     } catch (err) {
       console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -105,7 +116,10 @@ const ExperimentTracker = () => {
                   <div>
                     <h3 className="text-lg font-semibold">{exp.title}</h3>
                     <div className="flex items-center gap-3 text-sm text-slate-500 mt-1">
-                      <span className="flex items-center gap-1"><Calendar size={14} /> {new Date(exp.created_at).toLocaleDateString()}</span>
+                      <span className="flex items-center gap-1">
+                        <Calendar size={14} /> 
+                        {new Date(exp.created_at.replace(' ', 'T')).toLocaleDateString()}
+                      </span>
                       <span className="bg-slate-800 px-2 py-0.5 rounded text-xs">{exp.hardware}</span>
                     </div>
                   </div>

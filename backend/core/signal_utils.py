@@ -38,5 +38,6 @@ def ls_channel_estimation(rx_signal, tx_pilots):
     # H = Y / X
     y = np.array(rx_signal)
     x = np.array(tx_pilots)
-    h_est = y / x
+    # Add epsilon to prevent division by zero
+    h_est = y / (x + 1e-12)
     return h_est.real.tolist(), h_est.imag.tolist()

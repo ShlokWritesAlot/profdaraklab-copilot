@@ -5,10 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-const ChatView = () => {
-  const [messages, setMessages] = useState([
-    { role: 'assistant', content: "Hello! I'm your DarakLab Copilot. How can I assist with your FPGA or Signal Processing research today?" }
-  ]);
+const ChatView = ({ messages, setMessages }) => {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef(null);

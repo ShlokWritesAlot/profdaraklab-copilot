@@ -70,6 +70,12 @@ async def analyze_hls(payload: dict):
     suggestions = hls_advisor.suggest_optimizations(code)
     return {"suggestions": suggestions}
 
+@app.post("/hls/optimize")
+async def optimize_hls(payload: dict):
+    code = payload.get("code", "")
+    optimized, explanation = hls_advisor.optimize_code(code)
+    return {"optimized": optimized, "explanation": explanation}
+
 @app.post("/hls/parse-report")
 async def parse_hls_report(file: UploadFile = File(...)):
     content = await file.read()

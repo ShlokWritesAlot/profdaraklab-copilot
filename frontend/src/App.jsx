@@ -20,6 +20,9 @@ import ExperimentTracker from './components/ExperimentTracker';
 
 function App() {
   const [activeTab, setActiveTab] = useState('chat');
+  const [chatMessages, setChatMessages] = useState([
+    { role: 'assistant', content: "Hello! I'm your DarakLab Copilot. How can I assist with your FPGA or Signal Processing research today?" }
+  ]);
 
   const navItems = [
     { id: 'chat', name: 'AI Chat', icon: <MessageSquare size={20} /> },
@@ -65,7 +68,12 @@ function App() {
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col relative overflow-hidden">
-        {activeTab === 'chat' && <ChatView />}
+        {activeTab === 'chat' && (
+          <ChatView 
+            messages={chatMessages} 
+            setMessages={setChatMessages} 
+          />
+        )}
         {activeTab === 'signals' && <SignalLab />}
         {activeTab === 'hls' && <HLSAdvisor />}
         {activeTab === 'experiments' && <ExperimentTracker />}
